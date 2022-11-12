@@ -1,0 +1,73 @@
+image: "node" 
+
+before_script:
+  - npm install
+
+cache:
+  paths:
+    - "$CI_PROJECT_DIR/node_modules/"
+  key: "$CI_PROJECT_ID"
+
+test:
+  type: test
+  script:
+  - npm install -g jest
+  #- npm test
+
+production:
+  type: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y python-setuptools python-dev
+    - easy_install pip
+    - pip install awscli
+    - npm install -g webpack@3.11.0
+    - webpack
+    - aws s3 sync ./dist s3://inconcert.app/ --delete --acl public-read
+  only:
+    - tags
+  environment:
+    name: production
+    url: https://inconcert.app
+  variables:
+    ENV: production
+    API_BASE_URL: https://api.redpinemusic.com
+    AWS_ACCESS_KEY_ID: YOUR_AWS_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY: YOUR_AWS_SECRET_ACCESS_KEY
+    FACEBOOK_APP_ID: YOUR_FACEBOOK_APP_ID
+    GOOGLE_API_KEY: YOUR_GOOGLE_API_KEY
+    SENTRY_DSN_PUBLIC: YOUR_SENTRY_DSN_PUBLIC
+    WEBAPP_BASE_URL: https://inconcert.app
+    GOOGLE_ANALYTICS_PROPERTY: YOUR_GOOGLE_ANALYTICS_KEY
+    SQUARE_APPLICATION_ID: YOUR_SQUARE_APPLICATION_ID
+    SQUARE_ACCESS_TOKEN: YOUR_SQUARE_ACCESS_TOKEN
+
+staging:
+  type: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y python-setuptools python-dev
+    - easy_install pip
+    - pip install awscli
+    - npm install
+    - npm install -g webpack@3.11.0
+    - webpack
+    - aws s3 sync ./dist s3://staging.inconcert.app/ --delete --acl public-read
+  only:
+    - master
+  environment:
+    name: staging
+    url: http://staging.inconcert.app
+  variables:
+    ENV: staging
+    API_BASE_URL: https://api-staging.redpinemusic.com
+    AWS_ACCESS_KEY_ID: YOUR_AWS_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY: YOUR_AWS_SECRET_ACCESS_KEY
+    FACEBOOK_APP_ID: YOUR_FACEBOOK_APP_ID
+    GOOGLE_API_KEY: YOUR_GOOGLE_API_KEY
+    SENTRY_DSN_PUBLIC: YOUR_SENTRY_DSN_PUBLIC
+    WEBAPP_BASE_URL: https://staging.inconcert.app
+    GOOGLE_ANALYTICS_PROPERTY: YOUR_GOOGLE_ANALYTICS_KEY
+    SQUARE_APPLICATION_ID: YOUR_SQUARE_APPLICATION_ID
+    SQUARE_ACCESS_TOKEN: YOUR_SQUARE_ACCESS_TOKEN
+    

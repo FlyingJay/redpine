@@ -1,0 +1,92 @@
+{
+    "name": "redpine-web",
+    "version": "0.0.1",
+    "description": "1. Clone 2. Figure it out",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "webpack --watch",
+        "test": "node --expose-gc ./node_modules/jest/bin/jest.js --verbose --logHeapUsage --ci --maxWorkers=2",
+        "test:watch": "npm test -- --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com/redpine/web.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://gitlab.com/redpine/web/issues"
+    },
+    "jest": {
+        "testRegex": "src/.*tests.js(x?)",
+        "moduleNameMapper": {
+            "^Components(.*)$": "<rootDir>/src/Components$1",
+            "^Containers(.*)$": "<rootDir>/src/Containers$1",
+            "globals": "<rootDir>/src/globals.js"
+        },
+        "setupFiles": [
+            "./test.config.js"
+        ]
+    },
+    "homepage": "https://gitlab.com/redpine/web#README",
+    "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-jest": "^20.0.3",
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "copy-webpack-plugin": "^4.0.1",
+        "enzyme": "^2.8.2",
+        "express": "^4.16.3",
+        "html-webpack-plugin": "^2.28.0",
+        "jest": "^20.0.4",
+        "jest-webpack-alias": "^3.3.3",
+        "nock": "^9.0.13",
+        "react-test-renderer": "^15.5.4",
+        "redux-devtools-extension": "^2.13.5",
+        "redux-mock-store": "^1.2.3",
+        "sinon": "^2.3.2",
+        "webpack": "3.11.0"
+    },
+    "dependencies": {
+        "@mobiscroll/react": "file:./src/lib/mobiscroll-package/mobiscroll-react-4.5.0.tgz",
+        "@trendmicro/react-sidenav": "^0.4.5",
+        "babel-loader": "^7.0.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-react": "^6.24.1",
+        "chart.js": "^2.6.0",
+        "decimal.js": "^7.2.3",
+        "file-saver": "^1.3.8",
+        "history": "^4.7.2",
+        "immutable": "^3.8.1",
+        "jquery": "^3.2.1",
+        "marked": "^0.5.0",
+        "moment": "^2.18.1",
+        "qrcode.react": "^0.7.2",
+        "react": "^15.5.4",
+        "react-addons-css-transition-group": "^15.6.0",
+        "react-big-calendar": "^0.14.4",
+        "react-chartjs-2": "^2.6.1",
+        "react-detect-offline": "^2.1.2",
+        "react-dom": "^15.5.4",
+        "react-image-crop": "^8.2.2",
+        "react-layout-pack": "^0.2.3",
+        "react-redux": "^5.0.4",
+        "react-router": "^4.1.1",
+        "react-router-redux": "^5.0.0-alpha.6",
+        "react-scroll": "1.5.5",
+        "react-select": "^1.0.0-rc.5",
+        "react-select2-wrapper": "^1.0.4-beta5",
+        "react-slick": "^0.23.2",
+        "react-to-print": "^2.0.0-alpha-4",
+        "react-tooltip": "^3.10.0",
+        "react-waypoint": "^9.0.2",
+        "react-widgets": "^4.4.5",
+        "react-widgets-moment": "^4.0.2",
+        "redpine-api-client": "git+https://gitlab.com/redpine/api-client.git#v1.59.0",
+        "redux": "^3.6.0",
+        "redux-thunk": "^2.2.0",
+        "slick-carousel": "^1.8.1",
+        "spotify-web-api-node": "^3.1.1",
+        "styled-components": "^1.4.6"
+    }
+}

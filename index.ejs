@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="image/png" href="/Assets/images/logo.png" rel="icon">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!-- SqPaymentForm library -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+    <!-- Custom styles for SqPaymentForm -->
+    <link rel="stylesheet" type="text/css" href="/Assets/css/sqpaymentform-basic.css">
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= htmlWebpackPlugin.options.env.GOOGLE_API_KEY %>"></script>
+    <style type="text/css">
+      @font-face {
+        font-family: Pacifico;
+        src: url(/Assets/fonts/Pacifico-Regular.ttf);
+      }
+
+      @font-face {
+        font-family: 'Hanken';
+        src: url(/Assets/fonts/Hanken-Light.ttf);
+        font-weight: normal;
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        src: url(/Assets/fonts/OpenSans-Light.ttf);
+        font-weight: normal;
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        src: url(/Assets/fonts/OpenSans-Light.ttf);
+        font-weight: 300;
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        src: url(/Assets/fonts/OpenSans-Regular.ttf);
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: 'Open Sans';
+        src: url(/Assets/fonts/OpenSans-SemiBold.ttf);
+        font-weight: 700;
+      }
+
+      * {
+        font-family: 'Open Sans';
+        font-weight: normal;
+      }
+
+      button {
+        -webkit-appearance: none !important;
+        outline: none !important;
+      }
+
+      .no-scroll {
+        overflow-y: hidden;
+      }
+
+      /* 300 normal 600 subheading 700 headings */
+    </style>
+    <link rel="stylesheet" type="text/css" href="/Assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/css/react-select.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/css/react-big-calendar.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/react-widgets/css/react-widgets.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/css/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="/Assets/css/slick-theme.min.css">
+    <link rel="stylesheet" href="/Assets/css/mobiscroll.react.min.css">
+    <link rel="stylesheet" href="/Assets/css/mobiscroll-override.css">
+    <link rel="stylesheet" href="/Assets/css/react-sidenav.css">
+    <link rel="stylesheet" href="/Assets/css/react-image-crop.css">
+  </head>
+  <body id="body">
+    <script>window.ENV = '<%= htmlWebpackPlugin.options.env.ENV %>';</script>
+    <% if (['staging', 'production'].indexOf(htmlWebpackPlugin.options.env.ENV) > -1) { %>
+
+    <!-- SENTRY -->
+    <script src="https://cdn.ravenjs.com/3.19.1/raven.min.js"
+    crossorigin="anonymous"></script>
+    <script> Raven.config('<%= htmlWebpackPlugin.options.env.SENTRY_DSN_PUBLIC %>', {
+      environment: '<%= htmlWebpackPlugin.options.env.ENV %>',
+      release: '<%= htmlWebpackPlugin.options.env.RELEASE %>',
+    }).install()</script>
+
+
+    <!-- TAWK.TO -->
+    <script type="text/javascript">
+      if(screen.width < screen.height){
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        var coverUp = document.createElement('div');
+        coverUp.setAttribute('style', 'position: fixed;bottom: 0;right: 18px;width: 200px;height: 30px;background: white;z-index: 99999999999;');
+
+        // cover up the branding
+        Tawk_API.onChatMaximized = function(){
+          document.body.appendChild(coverUp);
+        };
+
+        Tawk_API.onChatMinimized = function() {
+          document.body.removeChild(coverUp);
+        };
+
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='<%= htmlWebpackPlugin.options.env.TAWK_URI %>';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+      }
+    </script>
+
+    <% } %>
+
+    <% if (true || htmlWebpackPlugin.options.env.ENV === 'production') { %>
+
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.env.GOOGLE_ANALYTICS_PROPERTY %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '<%= htmlWebpackPlugin.options.env.GOOGLE_ANALYTICS_PROPERTY %>');
+    </script>
+    <% } %>
+  </body>
+</html>

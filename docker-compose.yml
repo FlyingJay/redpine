@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  webapp:
+    build: .
+    command: >
+      /bin/bash -c "
+        cd code
+        npm install
+        webpack --watch &
+        npm start
+      "
+    volumes:
+      - .:/code
+    ports:
+      - "3000:3000"
